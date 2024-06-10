@@ -19,12 +19,8 @@ public class CarDto {
     private String type;
     private String transmission;
     private String color;
-    private Date year;
+    private String year;
     private String description;
     private Integer price;
     private MultipartFile image;
-
-
-
-
 }

@@ -7,6 +7,7 @@ import com.example.carrentalsystemcarsv.service.CarService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 
@@ -28,14 +29,12 @@ public class CarServiceImpl implements CarService {
         carEntity.setYear(carDto.getYear());
         carEntity.setType(carDto.getType());
         carEntity.setTransmission(carDto.getTransmission());
+        String fileName=StringUtils.cleanPath(carDto.getImage().getOriginalFilename());
         if (carDto.getImage()!=null){
-            carEntity.setImage(carDto.getImage().getBytes());
+            carEntity.setImage(fileName);
         }
-        CarEntity saveEntity = carRepo.save(carEntity);
-        if (saveEntity !=null){
-            return  modelMapper.map(saveEntity, CarDto.class);
-        }
-        return null;
+        CarEntity entity = carRepo.save(carEntity);
+        return modelMapper.map(entity, CarDto.class);
 
     }
 }

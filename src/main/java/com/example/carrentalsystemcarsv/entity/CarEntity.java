@@ -25,10 +25,9 @@ public class CarEntity {
     private String type;
     private String transmission;
     private String color;
-    private Date year;
+    private String year;
     private String description;
     private Integer price;
-    @Lob
-    private byte[]  image;
+    private String  image;
 
 }
