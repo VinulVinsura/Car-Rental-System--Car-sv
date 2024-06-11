@@ -23,4 +23,5 @@ public class CarDto {
     private String description;
     private Integer price;
     private MultipartFile image;
+    private byte[] img;
 }

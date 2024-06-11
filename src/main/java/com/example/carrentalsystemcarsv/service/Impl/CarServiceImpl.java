@@ -5,6 +5,7 @@ import com.example.carrentalsystemcarsv.entity.CarEntity;
 import com.example.carrentalsystemcarsv.repository.CarRepo;
 import com.example.carrentalsystemcarsv.service.CarService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -16,6 +17,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -37,7 +40,7 @@ public class CarServiceImpl implements CarService {
         carEntity.setTransmission(carDto.getTransmission());
         String fileName=StringUtils.cleanPath(carDto.getImage().getOriginalFilename());
         if (carDto.getImage()!=null){
-            carEntity.setImage(fileName);
+            carEntity.setImg(carDto.getImage().getBytes());
         }
         CarEntity car = carRepo.save(carEntity);
 //Creat a folder path for save Image
@@ -52,9 +55,13 @@ public class CarServiceImpl implements CarService {
        }catch (IOException e){
            throw new IOException("Could not save upload File" +fileName);
        }
+       return modelMapper.map(car, CarDto.class);
 
+    }
 
-        return modelMapper.map(car, CarDto.class);
-
+    @Override
+    public List<CarDto> getAllCar() {
+        List<CarEntity> allCars = carRepo.findAll();
+        return modelMapper.map(allCars,new TypeToken<List<CarDto>>(){}.getType());
     }
 }

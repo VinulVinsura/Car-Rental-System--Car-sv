@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/car")
@@ -41,5 +42,10 @@ public class CarController {
         return carService.addCar(carDto);
 
 
+    }
+
+    @GetMapping("/get-all-cars")
+    public List<CarDto> getAllCar(){
+        return carService.getAllCar();
     }
 }

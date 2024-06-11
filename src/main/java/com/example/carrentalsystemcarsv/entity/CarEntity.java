@@ -28,6 +28,7 @@ public class CarEntity {
     private String year;
     private String description;
     private Integer price;
-    private String  image;
+    @Column(columnDefinition = "longblob")
+    private byte[]  img;
 
 }
