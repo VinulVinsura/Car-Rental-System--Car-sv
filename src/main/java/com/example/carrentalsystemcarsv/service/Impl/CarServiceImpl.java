@@ -64,4 +64,13 @@ public class CarServiceImpl implements CarService {
         List<CarEntity> allCars = carRepo.findAll();
         return modelMapper.map(allCars,new TypeToken<List<CarDto>>(){}.getType());
     }
+
+    @Override
+    public Boolean deleteCar(Integer id) {
+        if (carRepo.existsById(id)){
+            carRepo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

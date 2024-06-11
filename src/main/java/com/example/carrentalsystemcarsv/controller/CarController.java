@@ -3,6 +3,8 @@ package com.example.carrentalsystemcarsv.controller;
 import com.example.carrentalsystemcarsv.dto.CarDto;
 import com.example.carrentalsystemcarsv.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.RequestEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,5 +49,13 @@ public class CarController {
     @GetMapping("/get-all-cars")
     public List<CarDto> getAllCar(){
         return carService.getAllCar();
+    }
+
+    @DeleteMapping("/delete-car/{id}")
+    public String deleteCarById(@PathVariable Integer id){
+        if (carService.deleteCar(id)){
+            return "Car Deleted !";
+        }
+        return "Car Not Deleted !";
     }
 }
