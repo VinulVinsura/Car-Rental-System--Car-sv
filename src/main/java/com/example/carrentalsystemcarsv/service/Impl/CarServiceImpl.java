@@ -9,7 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -33,8 +39,22 @@ public class CarServiceImpl implements CarService {
         if (carDto.getImage()!=null){
             carEntity.setImage(fileName);
         }
-        CarEntity entity = carRepo.save(carEntity);
-        return modelMapper.map(entity, CarDto.class);
+        CarEntity car = carRepo.save(carEntity);
+//Creat a folder path for save Image
+        String uploadDir="./car-img/"+car.getId();
+        Path uploadPath=Paths.get(uploadDir);
+        if (!Files.exists(uploadPath)){
+            Files.createDirectories(uploadPath);
+        }
+       try ( InputStream inputStream=carDto.getImage().getInputStream()) {
+           Path filePath=uploadPath.resolve(fileName);
+           Files.copy(inputStream,filePath, StandardCopyOption.REPLACE_EXISTING);
+       }catch (IOException e){
+           throw new IOException("Could not save upload File" +fileName);
+       }
+
+
+        return modelMapper.map(car, CarDto.class);
 
     }
 }
