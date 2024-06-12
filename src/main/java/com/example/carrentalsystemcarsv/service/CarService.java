@@ -11,4 +11,5 @@ public interface CarService  {
     CarDto addCar(CarDto carDto) throws IOException;
     List<CarDto> getAllCar();
     Boolean deleteCar(Integer id);
+    CarDto getCarById(Integer id);
 }

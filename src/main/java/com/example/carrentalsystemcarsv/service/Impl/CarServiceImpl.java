@@ -19,6 +19,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -69,8 +70,14 @@ public class CarServiceImpl implements CarService {
     public Boolean deleteCar(Integer id) {
         if (carRepo.existsById(id)){
             carRepo.deleteById(id);
+
             return true;
         }
         return false;
+    }
+
+    @Override
+    public CarDto getCarById(Integer id) {
+        return modelMapper.map(carRepo.findById(id), CarDto.class);
     }
 }

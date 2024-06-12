@@ -58,4 +58,14 @@ public class CarController {
         }
         return "Car Not Deleted !";
     }
+
+
+    @GetMapping("/get-carById/{id}")
+    public CarDto getCarById(@PathVariable Integer id){
+        CarDto carDto = carService.getCarById(id);
+        if (carDto !=null){
+            return carDto;
+        }
+        return null;
+    }
 }
