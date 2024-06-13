@@ -12,4 +12,5 @@ public interface CarService  {
     List<CarDto> getAllCar();
     Boolean deleteCar(Integer id);
     CarDto getCarById(Integer id);
+    CarDto updateCar(CarDto carDto);
 }

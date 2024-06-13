@@ -22,7 +22,8 @@ public class CarController {
     private CarService carService;
 
     @PostMapping("/add-car")
-    public CarDto addCar(@RequestParam("brand") String brand, @RequestParam("name") String name,
+    public CarDto addCar(@RequestParam("brand") String brand,
+                         @RequestParam("name") String name,
                          @RequestParam("type") String type,
                          @RequestParam("transmission") String transmission,
                          @RequestParam("color") String color,
@@ -32,6 +33,7 @@ public class CarController {
                          @RequestParam("image") MultipartFile file) throws IOException {
 
         CarDto carDto=new CarDto();
+
         carDto.setBrand(brand);
         carDto.setName(name);
         carDto.setType(type);
@@ -41,6 +43,7 @@ public class CarController {
         carDto.setDescription(description);
         carDto.setPrice(price);
         carDto.setImage(file);
+        System.out.println(carDto);
         return carService.addCar(carDto);
 
 
@@ -62,10 +65,17 @@ public class CarController {
 
     @GetMapping("/get-carById/{id}")
     public CarDto getCarById(@PathVariable Integer id){
+       
         CarDto carDto = carService.getCarById(id);
         if (carDto !=null){
             return carDto;
         }
         return null;
     }
+
+    @PutMapping("update-car")
+    public CarDto updateCar(@RequestBody CarDto carDto){
+        return carService.updateCar(carDto);
+    }
+
 }

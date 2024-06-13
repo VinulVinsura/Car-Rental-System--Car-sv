@@ -80,4 +80,23 @@ public class CarServiceImpl implements CarService {
     public CarDto getCarById(Integer id) {
         return modelMapper.map(carRepo.findById(id), CarDto.class);
     }
+
+    @Override
+    public CarDto updateCar(CarDto carDto) {
+        if (carRepo.existsById(carDto.getId())){
+            Optional<CarEntity> carEntity = carRepo.findById(carDto.getId());
+            CarEntity car = carEntity.get();
+            car.setBrand(carDto.getBrand());
+            car.setName(carDto.getName());
+            car.setType(carDto.getType());
+            car.setPrice(carDto.getPrice());
+            car.setYear(carDto.getYear());
+            car.setTransmission(carDto.getTransmission());
+            car.setColor(carDto.getColor());
+            car.setDescription(carDto.getDescription());
+            return modelMapper.map(carRepo.save(car), CarDto.class);
+
+        }
+        return null;
+    }
 }
