@@ -73,4 +73,17 @@ public class AdminCarController {
         return carService.updateCar(carDto);
     }
 
+
+    @GetMapping("/get-carBy/{brand}/{type}/{color}/{transmission}")
+
+    public List<CarDto> getCarByBrandColorTypeTransmission(@PathVariable String brand,
+                                                           @PathVariable String type,
+                                                           @PathVariable String color,
+                                                           @PathVariable String transmission){
+        System.out.println(brand);
+        System.out.println(type);
+        System.out.println(transmission);
+         return carService.getCarBy(brand,type,color,transmission);
+    }
+
 }

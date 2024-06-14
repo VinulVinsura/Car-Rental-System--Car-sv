@@ -12,4 +12,5 @@ public interface AdminCarService {
     Boolean deleteCar(Integer id);
     CarDto getCarById(Integer id);
     CarDto updateCar(CarDto carDto);
+    List<CarDto> getCarBy(String brand, String type, String color, String transmission);
 }

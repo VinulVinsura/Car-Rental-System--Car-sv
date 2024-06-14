@@ -18,7 +18,6 @@ public class CustomerCarController {
 
     @GetMapping("/get-car")
     List<CarDto> getAllCars(){
-
         return carService.getAllCars();
     }
 }

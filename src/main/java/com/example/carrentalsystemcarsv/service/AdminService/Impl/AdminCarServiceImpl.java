@@ -97,4 +97,12 @@ public class AdminCarServiceImpl implements AdminCarService {
         }
         return null;
     }
+
+    @Override
+    public List<CarDto> getCarBy(String brand, String type, String color, String transmission) {
+        List<CarEntity> carEntityList = carRepo.findAllByBrandOrTypeOrColorOrTransmission(brand,type,color,transmission);
+
+        return modelMapper.map(carEntityList,new TypeToken<List<CarDto>>(){}.getType());
+
+    }
 }
