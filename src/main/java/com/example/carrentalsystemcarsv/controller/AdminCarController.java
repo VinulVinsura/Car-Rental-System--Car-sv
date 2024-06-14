@@ -1,25 +1,20 @@
 package com.example.carrentalsystemcarsv.controller;
 
 import com.example.carrentalsystemcarsv.dto.CarDto;
-import com.example.carrentalsystemcarsv.service.CarService;
+import com.example.carrentalsystemcarsv.service.AdminService.AdminCarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.RequestEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/car")
 @CrossOrigin
-public class CarController {
+public class AdminCarController {
     @Autowired
-    private CarService carService;
+    private AdminCarService carService;
 
     @PostMapping("/add-car")
     public CarDto addCar(@RequestParam("brand") String brand,

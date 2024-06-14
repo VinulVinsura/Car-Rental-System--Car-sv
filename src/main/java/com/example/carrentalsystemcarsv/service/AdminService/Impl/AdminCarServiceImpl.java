@@ -1,28 +1,26 @@
-package com.example.carrentalsystemcarsv.service.Impl;
+package com.example.carrentalsystemcarsv.service.AdminService.Impl;
 
 import com.example.carrentalsystemcarsv.dto.CarDto;
 import com.example.carrentalsystemcarsv.entity.CarEntity;
 import com.example.carrentalsystemcarsv.repository.CarRepo;
-import com.example.carrentalsystemcarsv.service.CarService;
+import com.example.carrentalsystemcarsv.service.AdminService.AdminCarService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CarServiceImpl implements CarService {
+public class AdminCarServiceImpl implements AdminCarService {
     @Autowired
     private CarRepo carRepo;
     @Autowired
