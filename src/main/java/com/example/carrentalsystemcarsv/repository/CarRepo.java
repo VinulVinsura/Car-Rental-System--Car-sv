@@ -11,8 +11,5 @@ import java.util.List;
 public interface CarRepo extends JpaRepository<CarEntity,Integer> {
 
     List<CarEntity> findAllByBrandOrTypeOrColorOrTransmission(String brand ,String type ,String color, String transmission);
-    List<CarEntity> getAllByBrandOrTypeOrColorOrTransmission(String brand ,
-                                                             String type ,
-                                                             String color,
-                                                             String transmission);
+
 }

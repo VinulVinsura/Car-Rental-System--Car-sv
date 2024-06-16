@@ -1,6 +1,7 @@
 package com.example.carrentalsystemcarsv.controller;
 
 import com.example.carrentalsystemcarsv.dto.CarDto;
+import com.example.carrentalsystemcarsv.dto.SearchCarDto;
 import com.example.carrentalsystemcarsv.service.AdminService.AdminCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -74,16 +75,10 @@ public class AdminCarController {
     }
 
 
-    @GetMapping("/get-carBy/{brand}/{type}/{color}/{transmission}")
+    @GetMapping("/search-car")
 
-    public List<CarDto> getCarByBrandColorTypeTransmission(@PathVariable String brand,
-                                                           @PathVariable String type,
-                                                           @PathVariable String color,
-                                                           @PathVariable String transmission){
-        System.out.println(brand);
-        System.out.println(type);
-        System.out.println(transmission);
-         return carService.getCarBy(brand,type,color,transmission);
+    public List<CarDto> searchCar(@RequestBody SearchCarDto searchCarDto){
+               return carService.searchCar(searchCarDto);
     }
 
 }

@@ -1,12 +1,15 @@
 package com.example.carrentalsystemcarsv.service.AdminService.Impl;
 
 import com.example.carrentalsystemcarsv.dto.CarDto;
+import com.example.carrentalsystemcarsv.dto.SearchCarDto;
 import com.example.carrentalsystemcarsv.entity.CarEntity;
 import com.example.carrentalsystemcarsv.repository.CarRepo;
 import com.example.carrentalsystemcarsv.service.AdminService.AdminCarService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -99,10 +102,18 @@ public class AdminCarServiceImpl implements AdminCarService {
     }
 
     @Override
-    public List<CarDto> getCarBy(String brand, String type, String color, String transmission) {
-        List<CarEntity> carEntityList = carRepo.findAllByBrandOrTypeOrColorOrTransmission(brand,type,color,transmission);
-
-        return modelMapper.map(carEntityList,new TypeToken<List<CarDto>>(){}.getType());
+    public List<CarDto> searchCar(SearchCarDto searchCarDto) {
+        ExampleMatcher exampleMatcher=
+                ExampleMatcher.matchingAll()
+                        .withMatcher("brand",ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                        .withMatcher("type",ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                        .withMatcher("transmission",ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                        .withMatcher("color",ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
+        Example<CarEntity> carEntityExample=Example.of(modelMapper.map(searchCarDto, CarEntity.class),exampleMatcher);
+        System.out.println(carEntityExample);
+        List<CarEntity> carEntityList = carRepo.findAll(carEntityExample);
+        System.out.println(carEntityList.size());
+       return modelMapper.map(carEntityList,new TypeToken<List<CarDto>>(){}.getType());
 
     }
 }
