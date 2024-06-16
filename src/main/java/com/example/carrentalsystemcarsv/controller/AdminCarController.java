@@ -75,8 +75,8 @@ public class AdminCarController {
     }
 
 
-    @GetMapping("/search-car")
-// search-car Method
+    @GetMapping("/search-car") // Search car api
+
     public List<CarDto> searchCar(@RequestBody SearchCarDto searchCarDto){
                return carService.searchCar(searchCarDto);
     }
