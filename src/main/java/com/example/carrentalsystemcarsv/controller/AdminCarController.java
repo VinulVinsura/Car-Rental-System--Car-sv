@@ -1,5 +1,6 @@
 package com.example.carrentalsystemcarsv.controller;
 
+import com.example.carrentalsystemcarsv.annotation.AuditTime;
 import com.example.carrentalsystemcarsv.dto.CarDto;
 import com.example.carrentalsystemcarsv.dto.SearchCarDto;
 import com.example.carrentalsystemcarsv.service.AdminService.AdminCarService;
@@ -46,6 +47,7 @@ public class AdminCarController {
     }
 
     @GetMapping("/get-all-cars")
+    @AuditTime       // Creat our Annotation
     public List<CarDto> getAllCar(){
         return carService.getAllCar();
     }

@@ -110,9 +110,9 @@ public class AdminCarServiceImpl implements AdminCarService {
                         .withMatcher("transmission",ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
                         .withMatcher("color",ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
         Example<CarEntity> carEntityExample=Example.of(modelMapper.map(searchCarDto, CarEntity.class),exampleMatcher);
-        System.out.println(carEntityExample);
+
         List<CarEntity> carEntityList = carRepo.findAll(carEntityExample);
-        System.out.println(carEntityList.size());
+      
        return modelMapper.map(carEntityList,new TypeToken<List<CarDto>>(){}.getType());
 
     }
