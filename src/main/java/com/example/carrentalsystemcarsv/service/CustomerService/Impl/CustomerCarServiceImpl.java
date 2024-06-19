@@ -13,6 +13,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerCarServiceImpl implements CustomerCarService {
@@ -41,5 +42,14 @@ public class CustomerCarServiceImpl implements CustomerCarService {
         List<CarEntity> carEntityList = carRepo.findAll(carEntityExample);
         return modelMapper.map(carEntityList,new TypeToken<List<CarDto>>(){}.getType());
 
+    }
+
+    @Override
+    public CarDto getCarById(Integer id) {
+        if (carRepo.existsById(id)){
+            Optional<CarEntity> carEntity = carRepo.findById(id);
+            return modelMapper.map(carEntity, CarDto.class);
+        }
+        return null;
     }
 }

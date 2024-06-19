@@ -8,4 +8,6 @@ import java.util.List;
 public interface CustomerCarService {
     List<CarDto> getAllCars();
     List<CarDto> searchCar(SearchCarDto searchCarDto);
+
+    CarDto getCarById(Integer id);
 }

@@ -26,4 +26,10 @@ public class CustomerCarController {
     public List<CarDto> searchCar(@RequestBody SearchCarDto searchCarDto){
         return carService.searchCar(searchCarDto);
     }
+
+    @GetMapping("/get-car-byId/{id}")
+
+    public CarDto getCarByID(@PathVariable Integer id){
+        return carService.getCarById(id);
+    }
 }
